@@ -1,0 +1,14 @@
+20180815 参考文献样式文件更新
+1、在github网站上发现基于GB/T 7714-2015国家标准的参考文献样式，链接如下：
+https://github.com/hushidong/biblatex-gb7714-2015#jumptotutorial
+该样式文件已经集成到TexLive2017发行版中，据此修改南开大学毕业论文的LaTeX模板，修改细节记录如下：
+（1）下载 gb7714-2015.bbx, gb7714-2015.cbx, gb7714-2015ay.bbx, gb7714-2015ay.cbx 四个文件放到待编译的主文档所在目录，如果需要使用gbk编码，则还需复制 gb7714-2015-gbk.def 文件。
+（2）在导言区中，根据需要选择BibLaTeX宏包选项。
+% \usepackage[backend = biber, defernumbers = true,  sorting=none,  style = nkthesis]{biblatex}
+\usepackage[backend=biber,style=gb7714-2015,gbpunctin=false,gbpub=false]{biblatex}
+（3）在正文区的文献引用位置用 \cite{referencbibtexkey}的方式引用。
+（4）在正文区需要显示参考文献的地点添加相应语句。
+%\printbibliography[category = cited]
+\printbibliography
+（5）其他需要注意事项：
+对于bib文件中的每一项，估计样式文件默认必须有title字段，所以当不存在该字段时，参考文献显示的格式会有左侧不对齐的问题

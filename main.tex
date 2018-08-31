@@ -1,0 +1,197 @@
+% -*- coding: utf-8 -*-
+%%
+%%
+%%
+%%
+%%
+%%
+%%  本模板可以使用以下两种方式编译:
+%%
+%%     1. PDFLaTeX
+%%
+%%     2. XeLaTeX [推荐]
+%%
+%%  注意：
+%%    1. 在改变编译方式前应先删除 *.toc 和 *.aux 文件，
+%%       因为不同编译方式产生的辅助文件格式可能并不相同。
+%%
+%%
+\documentclass[12pt,openright,openany]{book}
+
+
+\usepackage{ifxetex}
+\ifxetex
+  \usepackage[bookmarksnumbered]{hyperref}
+\else
+  \usepackage[unicode,bookmarksnumbered]{hyperref}
+\fi
+
+\usepackage[emptydoublepage]{NKThesis}   % 中文
+%\usepackage[emptydoublepage,English]{NKThesis} % 英文
+
+\usepackage{listings}
+\usepackage{color}
+\usepackage{xcolor}
+
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{amssymb}
+\usepackage[ruled,vlined,algochapter]{algorithm2e}
+\usepackage{subfigure}
+\usepackage{multirow}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{fix-cm}
+
+%   根据需要选择 biblatex 宏包选项.
+%\usepackage[backend = biber, defernumbers = true,  sorting=none,  style = nkthesis]{biblatex}
+%  https://github.com/hushidong/biblatex-gb7714-2015
+%  gbpub选项用于处理当出版商、会议地址等不存在时处理
+%  gbpunctin选项用于处理连续出版物如会议等时，处理符号"//"，这是默认输出，当前为in:
+%  gbnamefmt选项默认情况下gbnamefmt=uppercase，作者姓名字母全部大写；
+%              当设置gbnamefmt=lowercase时，biblatex-gb7714-2015宏包对于bib文件中的作者姓名的大小写不做改变。
+\usepackage[backend=biber,style=gb7714-2015,gbpunctin=false,gbpub=false,gbnamefmt=lowercase]{biblatex}
+
+% hyperref宏包设置命令，下面的组合可以让正文和参考文献中的链接都显示为黑色
+\hypersetup{colorlinks=true,
+            pdfborder=0 0 1,
+            urlcolor=black,
+            citecolor=black,
+            linkcolor=black}
+
+\raggedbottom
+
+\addbibresource{nkthesis.bib}
+\DeclareBibliographyCategory{cited}
+\AtEveryCitekey{\addtocategory{cited}{\thefield{entrykey}}}
+
+\includeonly{
+abstract,
+manual,
+references,
+acknowledgements,
+resume
+}
+\newtheorem{Theorem}{\hskip 2em 定理}[chapter]
+\newtheorem{Lemma}[Theorem]{\hskip 2em 引理}
+\newtheorem{Corollary}[Theorem]{\hskip 2em 推论}
+\newtheorem{Proposition}[Theorem]{\hskip 2em 命题}
+\newtheorem{Definition}[Theorem]{\hskip 2em 定义}
+\newtheorem{Example}[Theorem]{\hskip 2em 例}
+
+\renewcommand\listfigurename{图清单}
+\renewcommand\listtablename{表清单}
+\renewcommand{\algorithmcfname}{算法}
+\renewcommand\appendixname{ }
+
+\hyphenpenalty=5000
+\tolerance=1000
+
+\newlength{\largNum}
+
+\newlength{\tocRightMargin}
+\setlength{\tocRightMargin}{2cm}
+
+\newlength{\tocLeftMarginSecondLineFigure}
+\setlength{\tocLeftMarginSecondLineFigure}{6.5em}
+
+\makeatletter
+\renewcommand*\l@figure[2]{%
+  \settowidth{\largNum}{\hss #2}
+  \ifnum \c@tocdepth >\m@ne%
+    \addpenalty{-\@highpenalty}%
+    \vskip 1.0em \@plus\p@%
+    \setlength\@tempdima{3.4em}%
+        \noindent%
+    \begingroup
+      \pretolerance=10000
+      \parindent \z@ \rightskip \tocRightMargin%
+      \parfillskip -\tocRightMargin%
+     \leavevmode \normalsize%
+     \advance\leftskip \tocLeftMarginSecondLineFigure%
+      \hskip -\leftskip%
+      {\figurename\mbox{\hspace{4pt}}#1}\nobreak%
+       \leaders\hbox{$\m@th%
+        \mkern \@dotsep mu\hbox{.}\mkern \@dotsep%
+        mu$} \hfil\nobreak\hb@xt@%
+                    \largNum{\hss #2}\par%
+      \penalty\@highpenalty%
+    \endgroup
+  \fi}
+\makeatother
+
+\makeatletter
+\renewcommand*\l@table[2]{%
+  \settowidth{\largNum}{\hss #2}
+  \ifnum \c@tocdepth >\m@ne%
+    \addpenalty{-\@highpenalty}%
+    \vskip 1.0em \@plus\p@%
+    \setlength\@tempdima{3.4em}%
+        \noindent%
+    \begingroup
+      \pretolerance=10000
+      \parindent \z@ \rightskip \tocRightMargin%
+      \parfillskip -\tocRightMargin%
+     \leavevmode \normalsize%
+     \advance\leftskip \tocLeftMarginSecondLineFigure%
+      \hskip -\leftskip%
+      {\tablename\mbox{\hspace{4pt}}#1}\nobreak%
+       \leaders\hbox{$\m@th%
+        \mkern \@dotsep mu\hbox{.}\mkern \@dotsep%
+        mu$} \hfil\nobreak\hb@xt@%
+                    \largNum{\hss #2}\par%
+      \penalty\@highpenalty%
+    \endgroup
+  \fi}
+\makeatother
+
+
+
+\begin{document}
+
+%  设置基本信息
+%  注意:  逗号`,'是项目分隔符. 如果某一项的值出现逗号, 应放在花括号内, 如 {,}
+%
+\NKTsetup{%
+  论文题目(中文) = 面向室内结构化和开放空间中智能终端用户定位的部分关键技术研究,
+  副标题         = ,
+  论文题目(英文) = Research on Smart Terminal Users Positioning in Indoor Structured and Open Space,
+  论文作者       = 于文平,
+  学号           = 1120140111,
+  指导教师       = {张建忠\quad 教授},
+  申请学位       = 博士,
+  培养单位       = 网络空间安全学院,
+  学科专业       = 计算机科学与技术,
+  研究方向       = 移动计算,
+  答辩委员会主席 = 李文龙,
+  论文评阅人 = {张老师，徐老师},
+  中图分类号     = ,
+  UDC            = ,
+  学校代码       = 10055,
+  密级           = 公开,
+                   % 公开 | 限制 | 秘密 | 机密, 若为公开, 不填以下三项
+  保密期限       = ,
+  审批表编号     = ,
+  批准日期       = ,
+  论文完成时间   = 二〇一八年十月,
+  答辩日期       = ,
+  论文类别       = 博士,
+                   % 博士 | 学历硕士 | 专业学位硕士 | 同等学力硕士
+  院/系/所       = ,
+  专业           = ,
+  联系电话       = ,
+  Email         = yuwenping@mail.nankai.edu.cn,
+  通讯地址(邮编) = ,
+  备注           = ,
+  是否批准为非公开论文 =,}
+
+\include{abstract}
+\tableofcontents
+\listoffigures
+\listoftables
+\include{manual}
+%\include{appendices}
+\include{references}
+\include{acknowledgements}
+\include{resume}
+\end{document}
