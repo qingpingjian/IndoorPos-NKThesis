@@ -1,10 +1,14 @@
 *.aux
 *.bbl
+*.bcf
 *.blg
 *.dvi
+*.lof
 *.log
+*.lot
 *.out
 *.toc
+*.run.xml
 *.synctex.gz
 .DS_Store
 main.pdf

@@ -29,6 +29,10 @@
 \usepackage[emptydoublepage]{NKThesis}   % 中文
 %\usepackage[emptydoublepage,English]{NKThesis} % 英文
 
+%  enumerate宏包来自定义列表的编号，如A，（1），1），例1等
+\usepackage{enumerate}
+
+%  listings宏包用来排版源代码
 \usepackage{listings}
 \usepackage{color}
 \usepackage{xcolor}
@@ -43,7 +47,7 @@
 \usepackage{booktabs}
 \usepackage{fix-cm}
 
-%   根据需要选择 biblatex 宏包选项.
+%  根据需要选择 biblatex 宏包选项.
 %\usepackage[backend = biber, defernumbers = true,  sorting=none,  style = nkthesis]{biblatex}
 %  https://github.com/hushidong/biblatex-gb7714-2015
 %  gbpub选项用于处理当出版商、会议地址等不存在时处理
@@ -52,7 +56,7 @@
 %              当设置gbnamefmt=lowercase时，biblatex-gb7714-2015宏包对于bib文件中的作者姓名的大小写不做改变。
 \usepackage[backend=biber,style=gb7714-2015,gbpunctin=false,gbpub=false,gbnamefmt=lowercase]{biblatex}
 
-% hyperref宏包设置命令，下面的组合可以让正文和参考文献中的链接都显示为黑色
+%  hyperref宏包设置命令，下面的组合可以让正文和参考文献中的链接都显示为黑色
 \hypersetup{colorlinks=true,
             pdfborder=0 0 1,
             urlcolor=black,
